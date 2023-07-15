@@ -3,29 +3,12 @@
 using namespace std;
 
 int main() {
-    char str[11];
-    cin >> str;
-    int n = 0;
-    while (str[n] != '\0')
-        n++;
-    int i = n;
-    while (i) {
-        int j = 0;
-        while (j < i) {
-            cout << str[j];
-            j++;
-        }
-        cout << endl;
-        i--;
+    char str[260];
+    cin.getline(str, 260);
+    str[0] -= 32;
+    for (int i = 1; str[i]; i++) {
+        if (str[i] >= 'a' && str[i] <= 'z' && (str[i + 1] == ' ' || str[i - 1] == ' ' || str[i + 1] == '\0'))
+            str[i] -= 32;
     }
-    i = 0;
-    while (str[i] != '\0') {
-        int j = i;
-        while (str[j] != '\0') {
-            cout << str[j];
-            j++;
-        }
-        cout << endl;
-        i++;
-    }
+    cout << str;
 }
