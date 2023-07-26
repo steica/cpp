@@ -4,19 +4,26 @@
 using namespace std;
 
 int main() {
-    char str[49][21];
     int n;
     cin >> n;
-    for (int i = 0; i < n; i++)
-        cin >> str[i];
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j ++) {
-            if (str[i][0] >= str[j][0])
-                swap(str[i], str[j]);
+    int elem;
+    int queue[1000]{};
+    int left = 0, right = 0;
+    for (int i = 0; i < n; i++) {
+        char str[6];
+        cin >> str;
+        if (strcmp(str, "front") == 0) {
+            if (left == right)
+                continue;
+            cout << queue[left] << "\n";
+        } else if (strcmp(str, "push") == 0) {
+            cin >> elem;
+            queue[right++] = elem;
+        } else {
+            if (right > left)
+                left++;
         }
     }
-    for (int i = 0; i < n; i++)
-        cout << str[i] << " ";
 }
 
 
