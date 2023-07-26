@@ -7,21 +7,22 @@ int main() {
     int n;
     cin >> n;
     int elem;
-    int queue[1000]{};
-    int left = 0, right = 0;
+    int stiva[1000]{};
+    int height_stiva = 0;
     for (int i = 0; i < n; i++) {
-        char str[6];
+        char str[5];
         cin >> str;
-        if (strcmp(str, "front") == 0) {
-            if (left == right)
-                continue;
-            cout << queue[left] << "\n";
-        } else if (strcmp(str, "push") == 0) {
+        if (strcmp(str, "top") == 0) {
+            if (height_stiva > 0)
+                cout << stiva[height_stiva - 1] << "\n";
+        }
+        else if (strcmp(str, "push") == 0) {
             cin >> elem;
-            queue[right++] = elem;
-        } else {
-            if (right > left)
-                left++;
+            stiva[height_stiva++] = elem;
+        }
+        else {
+            if (height_stiva > 0)
+                height_stiva--;
         }
     }
 }
