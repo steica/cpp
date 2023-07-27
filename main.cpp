@@ -3,27 +3,23 @@
 
 using namespace std;
 
+bool isVowel (char str) {
+    return (str == 'a' || str == 'e' || str == 'i' || str == 'o' || str == 'u');
+}
+
 int main() {
-    int n;
-    cin >> n;
-    int elem;
-    int stiva[1000]{};
-    int height_stiva = 0;
-    for (int i = 0; i < n; i++) {
-        char str[5];
-        cin >> str;
-        if (strcmp(str, "top") == 0) {
-            if (height_stiva > 0)
-                cout << stiva[height_stiva - 1] << "\n";
+    char str[101], *p;
+    cin.getline(str, 101);
+    p = strtok(str, " ,");
+    while (p != NULL) {
+        int cnt_voWel = 0;
+        cout << p << " " << strlen(p) << "\n";
+        for (int i = 0; i < strlen(p); i++) {
+            if (isVowel(p[i]))
+                cnt_voWel++;
         }
-        else if (strcmp(str, "push") == 0) {
-            cin >> elem;
-            stiva[height_stiva++] = elem;
-        }
-        else {
-            if (height_stiva > 0)
-                height_stiva--;
-        }
+        cout << " " << cnt_voWel << endl;
+        p = strtok(NULL, " ,");
     }
 }
 
