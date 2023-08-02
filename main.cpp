@@ -3,18 +3,27 @@
 
 using namespace std;
 
-bool isVowel (char chr) {
-    return chr == 'a' || chr == 'e' || chr == 'i' || chr == 'o' || chr == 'u';
-}
+int frecv[150];
 
 int main() {
-    char str[256];
-    cin.getline(str,256);
-    int cnt_vowel = 0;
-    for (int i = 0; str[i]; i++) {
-        if (isVowel(str[i]) && isVowel(str[i + 1]))
-            cnt_vowel++;
+    char str_1[21], str_2[21];
+    cin >> str_1 >> str_2;
+    bool is_anagram = true;
+    for (int i = 0; str_1[i]; i++) {
+        frecv[str_1[i]]++;
     }
-    cout << cnt_vowel;
+    for (int j = 0; str_2[j]; j++) {
+        frecv[str_2[j]]--;
+    }
+    for (int i = 'a'; i <= 'z'; i++) {
+        if (frecv[i] != 0) {
+            is_anagram = false;
+            break;
+        }
+    }
+    if (is_anagram)
+        cout << "1";
+    else
+        cout << "0";
 }
 
