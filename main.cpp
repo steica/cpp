@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstring>
-#include <fstream>
 
 using namespace std;
 
@@ -8,26 +7,14 @@ bool isVowel (char chr) {
     return chr == 'a' || chr == 'e' || chr == 'i' || chr == 'o' || chr == 'u';
 }
 
-ifstream fin("vocmax.in");
-ofstream fout("vocmax.out");
-
 int main() {
-    int n, indice;
-    char str[100][251];
-    fin >> n;
-    int maxim = 0;
-    for (int i = 0; i <= n; i++) {
-        fin.getline(str[i],251);
-        int cnt_vowel = 0;
-        for (int j = 0; str[i][j]; j++) {
-            if (isVowel(str[i][j]))
-                cnt_vowel++;
-        }
-        if (cnt_vowel > maxim) {
-            maxim = cnt_vowel;
-            indice = i;
-        }
+    char str[256];
+    cin.getline(str,256);
+    int cnt_vowel = 0;
+    for (int i = 0; str[i]; i++) {
+        if (isVowel(str[i]) && isVowel(str[i + 1]))
+            cnt_vowel++;
     }
-    fout << str[indice];
+    cout << cnt_vowel;
 }
 
