@@ -1,29 +1,30 @@
 #include <iostream>
-#include <cstring>
 
 using namespace std;
 
-int frecv[150];
-
 int main() {
-    char str_1[21], str_2[21];
-    cin >> str_1 >> str_2;
-    bool is_anagram = true;
-    for (int i = 0; str_1[i]; i++) {
-        frecv[str_1[i]]++;
+    int x, y;
+    cin >> x >> y;
+    int cop_x = x, cop_y = y;
+    int cif_1_x = 0, cif_1_y = 0;
+    while (x) {
+        if (x % 2 == 1)
+            cif_1_x++;
+        x /= 2;
     }
-    for (int j = 0; str_2[j]; j++) {
-        frecv[str_2[j]]--;
+    while (y) {
+        if (y % 2 == 1)
+            cif_1_y++;
+        y /= 2;
     }
-    for (int i = 'a'; i <= 'z'; i++) {
-        if (frecv[i] != 0) {
-            is_anagram = false;
-            break;
-        }
+   if (cif_1_x == cif_1_y) {
+        if (x < y)
+            cout << cop_x;
+        else
+            cout << cop_y;
     }
-    if (is_anagram)
-        cout << "1";
+    else if (cif_1_y > cif_1_x)
+        cout << cop_y;
     else
-        cout << "0";
+        cout << cop_x;
 }
-
