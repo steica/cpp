@@ -5,13 +5,18 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    int Z = 0, U = 0;
-    while (n) {
-        if (n % 2 == 0)
-            Z++;
-        else
-            U++;
-        n /= 2;
+    int baza_min;
+    int cif_min = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        while (x) {
+            if (cif_min < x % 10)
+                cif_min = x % 10;
+            x /= 10;
+        }
     }
-    cout << Z << " " << U;
+    if (baza_min < cif_min)
+        baza_min = cif_min + 1;
+    cout << baza_min;
 }
