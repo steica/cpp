@@ -1,22 +1,20 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-    int baza_min;
-    int cif_min = 0;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        while (x) {
-            if (cif_min < x % 10)
-                cif_min = x % 10;
-            x /= 10;
-        }
+    int b, n;
+    cin >> b >> n;
+    int a[10]{};
+    int numar = 0;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
     }
-    if (baza_min < cif_min)
-        baza_min = cif_min + 1;
-    cout << baza_min;
+    int putere = 0;
+    for (int i = n; i > 0; i--) {
+        numar += a[i] * pow(b, putere);
+        putere++;
+    }
+    cout << numar;
 }
