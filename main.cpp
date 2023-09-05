@@ -1,20 +1,23 @@
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
-    int a[30]{}, ind = 0;
+    int power_of_two = 1;
     while (n) {
-        a[ind++] = n % 2;
-        n /= 2;
+        if (n & 1) {
+            cout << power_of_two << " ";
+        }
+        power_of_two <<= 1;
+        n >>= 1;
     }
-    int putere = 1;
-    for (int i = 0; i < ind; i++) {
-        if (a[i] == 1)
-            cout << putere << " ";
-        putere *= 2;
-    }
+
+    return 0;
 }
+
+
+
+
+
