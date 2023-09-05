@@ -4,22 +4,17 @@
 using namespace std;
 
 int main() {
-    int n, b, c;
-    cin >> n >> b >> c;
-    int numar_b_10 = 0;
-    int putere = 1;
+    int n;
+    cin >> n;
+    int a[30]{}, ind = 0;
     while (n) {
-        numar_b_10 += n % 10 * putere;
-        putere *= b;
-        n /= 10;
+        a[ind++] = n % 2;
+        n /= 2;
     }
-    int a[100]{}, ind = 0;
-    while (numar_b_10) {
-        ind++;
-        a[ind] = numar_b_10 % c;
-        numar_b_10 /= c;
-    }
-    for (int i = ind; i >= 1; i--) {
-        cout << a[i];
+    int putere = 1;
+    for (int i = 0; i < ind; i++) {
+        if (a[i] == 1)
+            cout << putere << " ";
+        putere *= 2;
     }
 }
