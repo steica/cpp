@@ -1,20 +1,20 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-    int power_of_two = 1;
+    long long b, n, p;
+    cin >> b >> n >> p;
+    long long result = 1;
     while (n) {
-        if (n & 1) {
-            cout << power_of_two << " ";
+        if (n % 2 == 1) {
+            result = (b * result) % (long long)pow(10, p);
         }
-        power_of_two <<= 1;
-        n >>= 1;
+        b = (b * b) % (long long) pow(10, p);
+        n /= 2;
     }
-
-    return 0;
+    cout << result;
 }
 
 
