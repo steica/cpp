@@ -3,10 +3,12 @@
 using namespace std;
 
 int main() {
-    int n, m;
-    cin >> n >> m;
-    n = n + m;
-    m = n - m;
-    n = n - m;
-    cout << n << " " << m;
+    uint64_t n;
+    cin >> n;
+    int cnt = 0;
+    while (n) {
+        n >>= 1;
+        cnt++;
+    }
+    cout << cnt - 1;
 }
