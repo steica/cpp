@@ -3,7 +3,10 @@
 using namespace std;
 
 int main() {
-    int16_t n;
-    cin >> n;
-    cout << ((n >> 2) << 2);
+    int n, m;
+    cin >> n >> m;
+    n = n + m;
+    m = n - m;
+    n = n - m;
+    cout << n << " " << m;
 }
