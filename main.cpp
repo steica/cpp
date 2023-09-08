@@ -2,17 +2,31 @@
 
 using namespace std;
 
-int main() {
-    int n, p, X[1500];
-    cin >> n >> p;
-    for (int i = 1; i <= n; i++)
-        cin >> X[i];
-    for (int i = p; i < n; i++) {
-        X[i] = X[i + 1];
+bool estePrim(int x) {
+    if (x < 2)
+        return false;
+    for (int d = 2; d * d <= x; d++) {
+        if (x % d == 0)
+            return false;
     }
-    n--;
-    for (int i = 1; i <= n; i++)
-        cout << X[i] << " ";
+    return true;
+}
+
+int main() {
+    int n, a[1000];
+    cin >> n;
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    for (int i = 0; i < n; i++) {
+        if (estePrim(a[i])) {
+            n--;
+            for (int j = i; j < n; j++)
+                a[j] = a[j + 1];
+            i--;
+        }
+    }
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
 }
 
 
