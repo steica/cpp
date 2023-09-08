@@ -7,15 +7,10 @@ int main() {
     cin >> n;
     for (int i = 1; i <= n; i++)
         cin >> a[i];
-    for (int i = 2; i <= n; i += 2)
+    for (int i = 1, j = n; i <= j; i++, j--) {
         cout << a[i] << " ";
-    cout << endl;
-    if (n % 2 == 1) {
-        for (int i = n; i >= 1; i -= 2)
-            cout << a[i] << " ";
-    } else {
-        for (int i = n - 1; i >= 1; i -= 2)
-            cout << a[i] << " ";
+        if (i < j)
+            cout << a[j] << " ";
     }
 }
 
