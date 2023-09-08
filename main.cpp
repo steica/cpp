@@ -2,14 +2,10 @@
 
 using namespace std;
 
-bool estePrim(int x) {
-    if (x < 2)
-        return false;
-    for (int d = 2; d * d <= x; d++) {
-        if (x % d == 0)
-            return false;
-    }
-    return true;
+void stergere(int a[], int & n, int p) {
+    for (int i = p; i < n; i++)
+        a[i] = a[i + 1];
+    n--;
 }
 
 int main() {
@@ -18,10 +14,8 @@ int main() {
     for (int i = 0; i < n; i++)
         cin >> a[i];
     for (int i = 0; i < n; i++) {
-        if (estePrim(a[i])) {
-            n--;
-            for (int j = i; j < n; j++)
-                a[j] = a[j + 1];
+        if (a[i] % 2 == 0) {
+            stergere(a, n, i);
             i--;
         }
     }
@@ -30,7 +24,9 @@ int main() {
 }
 
 
-/*bool estePrim(int n) {
+/*
+ *
+1. bool estePrim(int n) {
     if (n < 2)
         return false;
     for (int d = 2; d * d <= n; d++) {
@@ -39,4 +35,11 @@ int main() {
     }
     return true;
 }
+
+2. void stergere(int a[], int & n, int p) {
+    for (int i = p; i < n; i++)
+        a[i] = a[i + 1];
+    n--;
+}
+ *
  */
