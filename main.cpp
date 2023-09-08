@@ -3,12 +3,16 @@
 using namespace std;
 
 int main() {
-    uint64_t n;
+    int n;
     cin >> n;
-    int cnt = 0;
-    while (n) {
-        n >>= 1;
-        cnt++;
+    int cnt_par = 0, cnt_impar = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x % 2 == 1)
+            cnt_impar++;
+        else
+            cnt_par++;
     }
-    cout << cnt - 1;
+    cout << abs(cnt_par - cnt_impar);
 }
