@@ -3,15 +3,16 @@
 using namespace std;
 
 int main() {
-    int n, a[1000];
-    cin >> n;
+    int n, p, X[1500];
+    cin >> n >> p;
     for (int i = 1; i <= n; i++)
-        cin >> a[i];
-    for (int i = 1, j = n; i <= j; i++, j--) {
-        cout << a[i] << " ";
-        if (i < j)
-            cout << a[j] << " ";
+        cin >> X[i];
+    for (int i = p; i < n; i++) {
+        X[i] = X[i + 1];
     }
+    n--;
+    for (int i = 1; i <= n; i++)
+        cout << X[i] << " ";
 }
 
 
