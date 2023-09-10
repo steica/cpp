@@ -1,10 +1,16 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
-int cmmdc(int x, int y) {
+struct Fractie {
+    int numarator, numitor;
+} F1, F2;
+
+int cmmmdc (int x, int y) {
+    int rest;
     while (y) {
-        int rest = x % y;
+        rest = x % y;
         x = y;
         y = rest;
     }
@@ -12,12 +18,9 @@ int cmmdc(int x, int y) {
 }
 
 int main() {
-    float a, b, c, d;
-    cin >> a >> b >> c >> d;
-    float fr1 = a / b, fr2 = c / d;
-    if (fr1 > fr2)
-        cout << a / cmmdc(a, b) << " " << b / cmmdc(a, b);
+    cin >> F1.numarator >> F1.numitor >> F2.numarator >> F2.numitor;
+    if (F1.numarator / F1.numitor > F2.numarator / F2.numitor)
+        cout << F1.numarator / cmmmdc(F1.numarator, F1.numitor) << " " << F1.numitor / cmmmdc(F1.numarator, F1.numitor);
     else
-        cout << c / cmmdc(c, d) << " " << d / cmmdc(c, d);
+        cout << F2.numarator / cmmmdc(F2.numarator, F2.numitor) << " " << F2.numitor / cmmmdc(F2.numarator, F2.numitor);
 }
-
