@@ -2,44 +2,22 @@
 
 using namespace std;
 
-void stergere(int a[], int & n, int p) {
-    for (int i = p; i < n; i++)
-        a[i] = a[i + 1];
-    n--;
+int cmmdc(int x, int y) {
+    while (y) {
+        int rest = x % y;
+        x = y;
+        y = rest;
+    }
+    return x;
 }
 
 int main() {
-    int n, a[1000];
-    cin >> n;
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-    for (int i = 0; i < n; i++) {
-        if (a[i] % 2 == 0) {
-            stergere(a, n, i);
-            i--;
-        }
-    }
-    for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
+    float a, b, c, d;
+    cin >> a >> b >> c >> d;
+    float fr1 = a / b, fr2 = c / d;
+    if (fr1 > fr2)
+        cout << a / cmmdc(a, b) << " " << b / cmmdc(a, b);
+    else
+        cout << c / cmmdc(c, d) << " " << d / cmmdc(c, d);
 }
 
-
-/*
- *
-1. bool estePrim(int n) {
-    if (n < 2)
-        return false;
-    for (int d = 2; d * d <= n; d++) {
-        if (n % d == 0)
-            return false;
-    }
-    return true;
-}
-
-2. void stergere(int a[], int & n, int p) {
-    for (int i = p; i < n; i++)
-        a[i] = a[i + 1];
-    n--;
-}
- *
- */
