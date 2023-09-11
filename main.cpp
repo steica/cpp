@@ -1,47 +1,48 @@
 #include <iostream>
-#include <cmath>
-#include <iomanip>
 
 using namespace std;
 
 struct Data {
     int an, luna, zi;
-    int numar_ordine;
-} a[1000], maxim, minim;
+};
 
-int main() {
-    int n;
-    cin >> n;
-    int p, q;                                       ///p - cea mai tanara; q - cea mai batrana;
-    for (int i = 1; i <= n; i++) {
-        cin >> a[i].an >> a[i].luna >> a[i].zi;
-    }
-    minim = a[1];
-    maxim = a[1];
-    for (int i = 2; i <= n; i++) {
-        if (minim.an > a[i].an) {
-            minim = a[i];
-            q = i;
-        } else if (minim.an == a[i].an && minim.luna > a[i].luna) {
-            minim = a[i];
-            q = i;
-        } else if (minim.an == a[i].an && minim.luna == a[i].luna && minim.zi > a[i].luna) {
-            minim = a[i];
-            q = i;
-        }
-    }
-    for (int i = 2; i <= n; i++) {
-        if (maxim.an < a[i].an) {
-            maxim = a[i];
-            p = i;
-        } else if (maxim.an == a[i].an && maxim.luna < a[i].luna) {
-            minim = a[i];
-            p = i;
-        } else if (maxim.an == a[i].an && maxim.luna == a[i].luna && maxim.zi < a[i].luna) {
-            maxim = a[i];
-            p = i;
-        }
-    }
-    cout << p << " " << q;
+int data_cmp(Data x, Data y) {
+    //returneaza  0 daca datele sunt egale
+    //            1 daca x > y
+    //           -1 daca x < y
+    if (x.an < y.an)
+        return -1;
+    if (x.an > y.an)
+        return 1;
+    if (x.luna < y.luna)
+        return -1;
+    if (x.luna > y.luna)
+        return 1;
+    if (x.zi < y.zi)
+        return -1;
+    if (x.zi > y.zi)
+        return 1;
+    return 0;
 }
 
+void citire(Data &d) {
+    cin >> d.an >> d.luna >> d.zi;
+}
+
+int main() {
+    int n, p, q;
+    Data dmin, dmax, d;
+    cin >> n;
+    citire(d);
+    dmin = dmax = d;
+    p = q = 1;
+    for (int i = 2; i <= n; i++) {
+        citire(d);
+        if (data_cmp(d, dmin) < 0)
+            dmin = d, q = i;
+        if (data_cmp(d, dmax) > 0)
+            dmax = d, p = i;
+    }
+    cout << p << " " << q;
+    return 0;
+}
