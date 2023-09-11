@@ -4,28 +4,44 @@
 
 using namespace std;
 
-struct Coordonate {
-    double abcisa, ordonata;
-} axa;
+struct Data {
+    int an, luna, zi;
+    int numar_ordine;
+} a[1000], maxim, minim;
 
 int main() {
     int n;
     cin >> n;
-    double distanta, distanta_max = 0;
-    int numar_puncte = 0;
-    double a[100]{};
-    int ind = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> axa.abcisa >> axa.ordonata;
-        distanta = sqrt (pow(axa.abcisa, 2) + pow(axa.ordonata, 2));
-        a[ind++] = distanta;
-        if (distanta_max < distanta)
-            distanta_max = distanta;
+    int p, q;                                       ///p - cea mai tanara; q - cea mai batrana;
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i].an >> a[i].luna >> a[i].zi;
     }
-    for (int i = 0; i < ind; i++) {
-        if (a[i] == distanta_max)
-            numar_puncte++;
+    minim = a[1];
+    maxim = a[1];
+    for (int i = 2; i <= n; i++) {
+        if (minim.an > a[i].an) {
+            minim = a[i];
+            q = i;
+        } else if (minim.an == a[i].an && minim.luna > a[i].luna) {
+            minim = a[i];
+            q = i;
+        } else if (minim.an == a[i].an && minim.luna == a[i].luna && minim.zi > a[i].luna) {
+            minim = a[i];
+            q = i;
+        }
     }
-    cout << fixed << setprecision(3) << distanta_max << " " << numar_puncte;
-
+    for (int i = 2; i <= n; i++) {
+        if (maxim.an < a[i].an) {
+            maxim = a[i];
+            p = i;
+        } else if (maxim.an == a[i].an && maxim.luna < a[i].luna) {
+            minim = a[i];
+            p = i;
+        } else if (maxim.an == a[i].an && maxim.luna == a[i].luna && maxim.zi < a[i].luna) {
+            maxim = a[i];
+            p = i;
+        }
+    }
+    cout << p << " " << q;
 }
+
