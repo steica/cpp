@@ -1,56 +1,60 @@
-#include <iostream>
+/*#include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <cstring>
+#include <cmath>
 
 using namespace std;
 
-struct Elev {
-    char nume[101], prenume[101];
-    int media1, media2, media3;
-    double media_g;
-} a[101];
+ifstream fin("sort_div.in");
+ofstream fout("sort_div.out");
 
-///int strcmp(char nume[20], char nume1[20]);
+struct numar{
+    int nr_div, cif_control, prima_cifra, valoare;
+} a[10001];
 
-int main() {
-    int n, cerinta;
-    cin >> n >> cerinta;
-    for (int i = 1; i <= n; i++) {
-        cin >> a[i].nume >> a[i].prenume >> a[i].media1 >> a[i].media2 >> a[i].media3;
-    }
-    for (int i = 1; i <= n; i++)
-        a[i].media_g = (a[i].media1 + a[i].media2 + a[i].media3) / 3.0;
-    double media_clasa = 0;
-    for (int i = 1; i <= n; i++)
-        media_clasa += a[i].media_g;
-    media_clasa /= n;
-    int numar_elevi = 0;
-    if (cerinta == 1) {
-        for (int i = 1; i <= n; i++) {
-            if (a[i].media_g >= media_clasa)
-                numar_elevi++;
-        }
-        cout << numar_elevi;
-    }
-    else {
-        cout << fixed << setprecision(2) << media_clasa << "\n";
-        for (int i = 1; i < n; i++)
-            for (int j = i + 1; j <= n; j++)
-                if (a[i].media_g < a[j].media_g)
-                    swap(a[i], a[j]);
-        for (int i = 1; i < n; i++)
-            for (int j = i + 1; j <= n; j++)
-                if (a[i].media_g == a[j].media_g && strcmp(a[i].nume, a[j].nume) > 0)
-                    swap(a[i], a[j]);
-        for (int i = 1; i < n; i++)
-            for (int j = i + 1; j <= n; j++)
-                if (a[i].media_g == a[j].media_g && strcmp(a[i].nume, a[j].nume) == 0 && strcmp(a[i].prenume, a[j].prenume) > 0)
-                    swap(a[i], a[j]);
-        for (int i = 1; i <= n; i++) {
-            cout << a[i].nume << " " << a[i].prenume << " " << fixed << setprecision(2) << a[i].media_g << "\n";;
+int NumarDivizori (int x) {
+    int cnt_div = 0;
+    for (int d = 1; d <= sqrt(x); d++) {
+        if (x % d == 0) {
+            cnt_div++;
+            if (d != x / d)
+                cnt_div++;
         }
     }
-    return 0;
 }
 
+int CifraControl (int x) {
+    int cifra_control = 0;
+    while (x) {
+        cifra_control += x % 10;
+        x /= 10;
+    }
+}
+
+
+int main() {
+    int n;
+    fin >> n;
+
+}
+
+*/
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    while (n >= 10) {
+        int suma_cifre = 0;
+        while (n) {
+            suma_cifre += n % 10;
+            n /= 10;
+        }
+        n = suma_cifre;
+    }
+    cout << n;
+}
 
