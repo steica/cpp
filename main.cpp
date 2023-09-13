@@ -44,17 +44,19 @@ int main() {
 
 using namespace std;
 
+int cifraControl (int x) {
+    if (x < 10)
+        return x;
+    int sumaCifrelor = 0;
+    while (x) {
+        sumaCifrelor += x % 10;
+        x /= 10;
+    }
+    return cifraControl(sumaCifrelor);
+}
+
 int main() {
     int n;
     cin >> n;
-    while (n >= 10) {
-        int suma_cifre = 0;
-        while (n) {
-            suma_cifre += n % 10;
-            n /= 10;
-        }
-        n = suma_cifre;
-    }
-    cout << n;
+    cout << cifraControl(n);
 }
-
