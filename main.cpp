@@ -7,29 +7,26 @@
 
 using namespace std;
 
-ifstream fin("serbare.in");
-ofstream fout("serbare.out");
+ifstream fin("ore.in");
+ofstream fout("ore.out");
 
-struct Grupa {
-    int nr_copii, tip_uniforma;
-} a[12];
-
-bool comparare (Grupa A, Grupa B) {
-    return A.nr_copii > B.nr_copii;
-}
+struct Eveniment {
+    int h, m, s;
+};
 
 int main() {
-    int n, p;
-    fin >> n >> p;
-    for (int i = 1; i <= n; i++) {
-        int x, y;
-        fin >> x >> y;
-        a[y].nr_copii += x;
-        a[y].tip_uniforma = y;
-    }
-    sort (a + 1, a + p + 1, comparare);
-    for (int i = 1; i <= p; i++)
-        fout << a[i].tip_uniforma << " ";
+    Eveniment event1, event2;
+    fin >> event1.h >> event1.m >> event1.s;
+    fin >> event2.h >> event2.m >> event2.s;
+    fout << event1.h << ": " << event1.m << ": " << event1.s;
+    fout << "\n";
+    fout << event2.h << ": " << event2.m << ": " << event2.s;
+    fout << "\n";
+    fout << 3600 * event1.h + 60 * event1.m + event1.s;
+    fout << "\n";
+    fout << 3600 * event2.h + 60 * event2.m + event2.s;
+    fout << "\n";
+    int timp_total = 3600 * event1.h + 60 * event1.m + event1.s + 3600 * event2.h + 60 * event2.m + event2.s;
+    fout << timp_total / 3600 << ": " << timp_total % 3600 / 60 << ": " << (timp_total % 3600 % 60);
 }
-
 
