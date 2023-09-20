@@ -3,16 +3,19 @@
 
 using namespace std;
 
-void FNume (char s[], char id[]) {
-    char *pointer = strchr (s, ' ');
-    strcpy (id, pointer + 1);
-    strcat (id, "2022");
+bool isVowel(char chr) {
+    return chr == 'a' || chr == 'e' || chr == 'i' || chr == 'o' || chr == 'u';
 }
 
 int main() {
-    char str[51], id[50];
-    cin.getline (str, 51);
-    FNume(str, id);
-    cout << id;
-
+    char str[256];
+    int cnt = 0;
+    cin.getline(str, 256);
+    for (int i = 1; str[i + 1]; i++) {
+        if (str[i - 1] < 'a' || str[i - 1] > 'z' || str[i + 1] < 'a' || str[i + 1] > 'z')
+            continue;
+        if (isVowel(str[i]) && !isVowel(str[i - 1]) && !isVowel(str[i + 1]))
+            cnt++;
+    }
+    cout << cnt;
 }
