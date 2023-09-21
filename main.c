@@ -1,24 +1,21 @@
 #include <stdio.h>
 
-int isVowel(char ch) {
-    return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
-           ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U';
-}
-
 int main(void) {
-    char a[31], b[31];
-    scanf("%s %s", a, b);
-    char sablon[31];
-    int ind = 0;
+    char a[256];
+    gets(a);
+    int frecv[26] = {0};
+    int max = 0;
     for (int i = 0; a[i]; i++) {
-        if (isVowel(a[i]) && isVowel(b[i]))
-            sablon[ind++] = '*';
-        else if (!isVowel(a[i]) && !isVowel(b[i]))
-            sablon[ind++] = '#';
-        else
-            sablon[ind++] = '?';
+        if (a[i] >= 'a' && a[i] <= 'z')
+            frecv[a[i] - 'a']++;
     }
-    sablon[ind] = '\0';
-    printf("%s", sablon);
+    int litera;
+    for (int i = 0; i <= 'z' - 'a'; i++) {
+        if (max < frecv[i]) {
+            max = frecv[i];
+            litera = i;
+        }
+    }
+    printf("%c", litera + 'a');
 }
 
