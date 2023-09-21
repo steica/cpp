@@ -2,23 +2,23 @@
 
 int isVowel(char ch) {
     return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
-            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U';
+           ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U';
 }
 
 int main(void) {
-    char nume[21], prenume[21];
-    scanf("%20s %20s", nume, prenume);
-    char c[41];
-    int ind_c = 0;
-    for (int i = 0; prenume[i]; i++) {
-        if (!isVowel(prenume[i]))
-            c[ind_c++] = prenume[i];
-
+    char a[31], b[31];
+    scanf("%s %s", a, b);
+    char sablon[31];
+    int ind = 0;
+    for (int i = 0; a[i]; i++) {
+        if (isVowel(a[i]) && isVowel(b[i]))
+            sablon[ind++] = '*';
+        else if (!isVowel(a[i]) && !isVowel(b[i]))
+            sablon[ind++] = '#';
+        else
+            sablon[ind++] = '?';
     }
-    c[ind_c++] = ' ';
-    for (int i = 0; nume[i]; i++)
-        c[ind_c++] = nume[i];
-    c[ind_c] = '\0';
-    printf("%s", c);
+    sablon[ind] = '\0';
+    printf("%s", sablon);
 }
 
