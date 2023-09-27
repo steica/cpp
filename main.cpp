@@ -4,31 +4,22 @@
 using namespace std;
 
 int main() {
-    char str[256];
-    cin.getline (str, 255);
-    char separator[] = " ";
-    char *pointer;
-    char matrice[100][100]{}, ind = 0;
-    pointer = strtok(str, separator);
-    while (pointer) {
-        strcpy(matrice[++ind], pointer);
-        pointer = strtok(NULL, separator);
-    }
+    char str[101];
+    cin.getline(str, 100);
+    char maxi[101] = "0";
     bool gasit = false;
-    char rez[100]{};
-    int max = -1;
-
-    for (int i = 1; i <= ind; i++) {
-        if (isdigit(matrice[i][0])) {
-            if (matrice[i][0] - 0 > max) {
-                max = matrice[i][0] - 0;
-                strcpy(rez, matrice[i]);
+    char *pointer = strtok(str, " ");
+    while (pointer) {
+        if (isdigit(pointer[0])) {
+            if (pointer[0] > maxi[0]) {
+                strcpy(maxi, pointer);
+                gasit = true;
             }
-            gasit = true;
         }
+        pointer = strtok(NULL, " ");
     }
     if (gasit)
-        cout << rez;
+        cout << maxi;
     else
         cout << "nu exista";
 }
