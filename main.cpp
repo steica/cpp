@@ -5,40 +5,30 @@ using namespace std;
 
 int main() {
     char str[256];
-    cin.getline(str, 256);
-    char sep[] = " ,.";
-    char matrice[255][11];
-    int ind = 0;
-    char *pointer = strtok(str, sep);
-
+    cin.getline (str, 255);
+    char separator[] = " ";
+    char *pointer;
+    char matrice[100][100]{}, ind = 0;
+    pointer = strtok(str, separator);
     while (pointer) {
-            strcpy(matrice[++ind], pointer);
-            pointer = strtok(NULL, sep);
-    }
-
-    for (int i = 1; i < ind; ++i) {
-        for (int j = i + 1; j <= ind; ++j) {
-            if (strcmp(matrice[i], matrice[j]) > 0) {
-                char aux[11];
-                strcpy(aux, matrice[i]);
-                strcpy(matrice[i], matrice[j]);
-                strcpy(matrice[j], aux);
-            }
-        }
+        strcpy(matrice[++ind], pointer);
+        pointer = strtok(NULL, separator);
     }
     bool gasit = false;
-    for (int i = 1; i <= ind && !gasit; ++i) {
-        bool palindrom = true;
-        int stg = 0, dr = strlen(matrice[i]) - 1;
-        for ( ; stg <= dr; ++stg, --dr) {
-            if (matrice[i][stg] != matrice[i][dr])
-                palindrom = false;
-        }
-        if (palindrom) {
+    char rez[100]{};
+    int max = -1;
+
+    for (int i = 1; i <= ind; i++) {
+        if (isdigit(matrice[i][0])) {
+            if (matrice[i][0] - 0 > max) {
+                max = matrice[i][0] - 0;
+                strcpy(rez, matrice[i]);
+            }
             gasit = true;
-            cout << matrice[i];
         }
     }
-    if(!gasit)
-        cout << "IMPOSIBIL";
+    if (gasit)
+        cout << rez;
+    else
+        cout << "nu exista";
 }
