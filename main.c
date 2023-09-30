@@ -2,27 +2,33 @@
 #include <string.h>
 
 int main(void) {
-    char str[102];
-    fgets(str, sizeof(str), stdin);
+    FILE *input, *output;
+    input = fopen("paranteze1.in", "r");
+    output = fopen("paranteze1.out", "w");
     int n;
-    scanf("%d", &n);
-    int ind = 0;
-    int gasit = 0, i = 0;
-    for (i = 0; str[i]; i++) {
-        if (str[i] == ' ' || str[i] == '\n') {
-            if (i - ind == n) {
-                gasit = 1;
-                for (int j = ind; j < i; j++)
-                    printf("%c", str[j]);
-                printf("\n");
+    fscanf(input, "%d", &n);
+    char str[256];
+    char stiva[255];
+    for (int i = 1; i <= n; i++) {
+        fscanf(input, "%s", str);
+        int height_stiva = 0;
+        for (int j = 0; str[j]; j++) {
+            if (height_stiva == 0)
+                stiva[height_stiva++] = str[j];
+            else {
+                if (stiva[height_stiva - 1] == '(' && str[j] == ')')
+                    height_stiva--;
+                else {
+                    stiva[height_stiva++] = str[j];
+                }
             }
-            ind = i + 1;
         }
+        if (height_stiva == 0)
+            fprintf(output, "1\n");
+        else
+            fprintf(output, "0\n");
     }
-    if (!gasit)
-        printf("nu exista");
+    fclose(input);
+    fclose(output);
 }
 
-
-//str[i] = '\0';
-//printf("%s", str + ind)
