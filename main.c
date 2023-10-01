@@ -2,33 +2,23 @@
 #include <string.h>
 
 int main(void) {
-    FILE *input, *output;
-    input = fopen("paranteze1.in", "r");
-    output = fopen("paranteze1.out", "w");
     int n;
-    fscanf(input, "%d", &n);
-    char str[256];
-    char stiva[255];
-    for (int i = 1; i <= n; i++) {
-        fscanf(input, "%s", str);
-        int height_stiva = 0;
-        for (int j = 0; str[j]; j++) {
-            if (height_stiva == 0)
-                stiva[height_stiva++] = str[j];
-            else {
-                if (stiva[height_stiva - 1] == '(' && str[j] == ')')
-                    height_stiva--;
-                else {
-                    stiva[height_stiva++] = str[j];
-                }
-            }
+    scanf("%d", &n);
+    int elem;
+    int stiva[1000] = {};
+    char str[5];
+    int height_stiva = 0;
+    for (int i = 0; i < n; i++) {
+        scanf("%s", str);
+        if (strcmp(str, "top") == 0) {
+            if (height_stiva > 0)
+                printf("%d\n", stiva[height_stiva - 1]);
+        } else if (strcmp(str, "pop") == 0) {
+            if (height_stiva > 0)
+                height_stiva--;
+        } else {
+            scanf("%d", &elem);
+            stiva[height_stiva++] = elem;
         }
-        if (height_stiva == 0)
-            fprintf(output, "1\n");
-        else
-            fprintf(output, "0\n");
     }
-    fclose(input);
-    fclose(output);
 }
-
