@@ -3,31 +3,21 @@
 
 int main(void) {
     FILE *input, *output;
-    input = fopen("paranteze3.in", "r");
-    output = fopen("paranteze3.out", "w");
-    int n;
-    fscanf(input, "%d", &n);
-    char str[256];
-    char stiva[256];
-    for (int i = 1; i <= n; i++) {
-        fscanf(input, "%s", str);
-        int height_stiva = 0;
-        for (int j = 0; str[j]; j++) {
-            if (height_stiva == 0)
-                stiva[height_stiva++] = str[j];
-            else {
-                if (stiva[height_stiva - 1] == '(' && str[j] == ')' || stiva[height_stiva - 1] == '[' && str[j] == ']')
-                    height_stiva--;
-                else
-                    stiva[height_stiva++] = str[j];
-            }
+    input = fopen("paranteze2.in", "r");
+    output = fopen("paranteze2.out", "w");
+    char str[255];
+    fscanf(input, "%s", str);
+    int cnt = 0, max = 0;
+    for (int i = 0; str[i]; i++) {
+        if (str[i] == '(') {
+            cnt++;
+            if (cnt > max)
+                max = cnt;
+        } else {
+            cnt--;
         }
-        if (height_stiva == 0)
-            fprintf(output, "1\n");
-        else
-            fprintf(output, "0\n");
-
     }
+    fprintf(output, "%d", max);
     fclose(input);
     fclose(output);
 }
