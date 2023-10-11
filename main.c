@@ -1,21 +1,17 @@
 #include <stdio.h>
+#include <math.h>
 
-long long cmmnr(int n) {
-    int frecv[10] = {};
-    while (n) {
-        frecv[n % 10]++;
-        n /= 10;
+long long concat(long long a, long long b) {
+    long long copie_b = b;
+    while (copie_b) {
+        a *= 10;
+        copie_b /= 10;
     }
-    int rezultat = 0;
-    for (int i = 9; i >= 0; i--) {
-        for (int j = 1; j <= frecv[i]; j++)
-            rezultat = 10 * rezultat + i;
-    }
-    return rezultat;
+    return a + b;
 }
 
 int main(void) {
-    int x;
-    scanf("%d", &x);
-    printf("%lld", cmmnr(x));
+    long long x, y;
+    scanf("%lld%lld", &x, &y);
+    printf("%lld", concat(x, y));
 }
