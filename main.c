@@ -1,17 +1,21 @@
 #include <stdio.h>
-#include <math.h>
 
-long long concat(long long a, long long b) {
-    long long copie_b = b;
-    while (copie_b) {
-        a *= 10;
-        copie_b /= 10;
+int prim(int n) {
+    if (n < 2)
+        return 0;
+    else if (n == 2)
+        return 1;
+    else {
+        for (int d = 3; d * d <= n; d++) {
+            if (n % d == 0)
+                return 0;
+        }
     }
-    return a + b;
+    return 1;
 }
 
 int main(void) {
-    long long x, y;
-    scanf("%lld%lld", &x, &y);
-    printf("%lld", concat(x, y));
+    long long x;
+    scanf("%d", &x);
+    printf("%d", prim(x));
 }
