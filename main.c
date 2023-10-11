@@ -1,14 +1,21 @@
 #include <stdio.h>
 
-long long sumcif(int n) {
-    if (n == 0)
-        return 0;
-    else
-        return n % 10 + sumcif(n / 10);
+long long cmmnr(int n) {
+    int frecv[10] = {};
+    while (n) {
+        frecv[n % 10]++;
+        n /= 10;
+    }
+    int rezultat = 0;
+    for (int i = 9; i >= 0; i--) {
+        for (int j = 1; j <= frecv[i]; j++)
+            rezultat = 10 * rezultat + i;
+    }
+    return rezultat;
 }
 
 int main(void) {
     int x;
     scanf("%d", &x);
-    printf("%lld", sumcif(x));
+    printf("%lld", cmmnr(x));
 }
