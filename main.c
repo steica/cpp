@@ -1,40 +1,22 @@
 #include <stdio.h>
+#include <math.h>
 
-int prim(int n) {
-    if (n < 2)
-        return 0;
-    if (n > 2 && n & 2 == 0)
-        return 0;
-    for (int d = 3; d * d <= n; d += 2)
-        if (n % d == 0)
-            return 0;
-    return 1;
-}
-
-int a_prim(int n) {
-    int cnt_diviz = 0;
-    for (int d = 2; d * d <= n; d++) {
-        if (n % d == 0)
-            cnt_diviz += 2;
-        if (d * d == n)
-            cnt_diviz--;
+int nz(int n){
+    int cnt5 = 0, cnt2 = 0;
+    int put2 = 2, put5 = 5;
+    while(put2 < n){
+        cnt2 += n / put2;
+        put2 *= 2;
     }
-    if (cnt_diviz == 2) {
-        int div1, div2;
-        for (int d = 2; d * d <= n; d++)
-            if (n % d == 0) {
-                div1 = d;
-                div2 = n / d;
-            }
-        if (prim(div1) && prim(div2))
-            return 1;
+    while(put5 < n){
+        cnt5 += n / put5;
+        put5 *= 5;
     }
-    return 0;
+    return cnt5;
 }
-
 
 int main(void) {
     int x;
     scanf("%d", &x);
-    printf("%d", prim(x));
+    printf("%d", nz(x));
 };
