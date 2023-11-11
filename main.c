@@ -1,41 +1,40 @@
 #include <stdio.h>
 
+void push(int x, int Q[], int *left, int *right) {
+    for (int i = *left; i < *right; i++) {
+        if (Q[i] == x) {
+            *left = i + 1;
+            break;
+        }
+    }
+    Q[(*right)++] = x;
+}
+
+int query(int x, int Q[], int left, int right) {
+    for (int i = left; i < right; i++) {
+        if (Q[i] == x) {
+            return i - left + 1;
+        }
+    }
+    return -1;
+}
+
 int main() {
-    int n, a, x, y;
-    int freq[10000] = {0};
-    scanf("%d %d %d %d", &n, &a, &x, &y);
-    int queue[10000] = {a};
+    int M;
+    int queue[100001] = {0};
     int left = 0, right = 0;
-    int op[] = {x, y};
-    freq[a] = 1;
-    while (left <= right) {
-        for (int i = 0; i < 2; i++) {
-           int aux = queue[left] - op[i];
-           if (aux < 0 || aux > n)
-               continue;
-           if (freq[aux] == 0) {
-               queue[++right] = aux;
-               freq[aux] = 1;
-           }
-        }
-        left++;
+    FILE *in = fopen("coada1.in", "r");
+    fscanf(in, "%d", &M);
+    FILE *out = fopen("coada1.out", "w");
+    for (int i = 0; i < M; i++) {
+        char operatie[6];
+        int x;
+        fscanf(in, "%s %d", operatie, &x);
+        if(operatie[0] == 'p')
+            push(x, queue, &left, &right);
+        else
+            fprintf(out, "%d\n", query(x, queue, left, right));
     }
-    queue[0] = a;
-    left = 0, right = 0;
-    while (left <= right) {
-        for (int i = 0; i < 2; i++) {
-            int aux = queue[left] + op[i];
-            if (aux < 0 || aux > n)
-                continue;
-            if (freq[aux] == 0) {
-                queue[++right] = aux;
-                freq[aux] = 1;
-            }
-        }
-        left++;
-    }
-    for (int i = 0; i <= n; i++) {
-        if (freq[i] == 1)
-            printf("%d ", i);
-    }
+    fclose(in);
+    fclose(out);
 }
